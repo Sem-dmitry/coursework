@@ -25,11 +25,15 @@ public class TrainingSession {
     @SequenceGenerator(sequenceName = "training_session_id_seq", name = "training_session_id_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "training_session_id_seq")
     private Long id;
+
     @ManyToOne
     @JoinColumn(name = "admin_id")
     private User user;
+
     private LocalDateTime startTime;
+
     private LocalDateTime endTime;
+
     @Enumerated
     private TSStatuses status;
 }

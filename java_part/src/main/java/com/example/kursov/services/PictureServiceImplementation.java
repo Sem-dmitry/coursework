@@ -2,6 +2,7 @@ package com.example.kursov.services;
 
 import com.example.kursov.models.Picture;
 import com.example.kursov.repositories.PictureRepository;
+import com.fasterxml.jackson.databind.jsontype.PolymorphicTypeValidator;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,7 +12,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 
 @Service
@@ -58,5 +61,31 @@ public class PictureServiceImplementation implements PictureService{
 
     public void savePicture(Picture picture) {
         pictureRepository.save(picture);
+    }
+
+    @Override
+    public List<Picture> getAllPicture() {
+        return pictureRepository.findAll();
+    }
+
+    @Override
+    public Optional<Picture> getPictureById(Long id) {
+        return pictureRepository.findById(id);
+    }
+
+    @Override
+    public void updatePicture(Picture updatePicture, Long id) {
+        Optional<Picture> picture = pictureRepository.findById(id);
+        if (picture.isPresent()) {
+            Picture savedPicture = picture.get();
+            savedPicture.setMatrix(updatePicture.getMatrix());
+            savedPicture.setTarget(updatePicture.getTarget());
+            pictureRepository.save(savedPicture);
+        }
+    }
+
+    @Override
+    public void deletePicture(Long id) {
+        pictureRepository.deleteById(id);
     }
 }

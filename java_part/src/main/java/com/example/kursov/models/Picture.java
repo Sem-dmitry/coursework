@@ -17,8 +17,10 @@ public class Picture {
     @SequenceGenerator(sequenceName = "user_id_seq", name = "user_id_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_id_seq")
     private Long id;
+
     @Column(name = "pixels")
     private int[] matrix;
+
     @Column(name = "target")
     private int target;
 }

@@ -7,6 +7,4 @@ import java.util.List;
 
 public interface AdminService {
     ResponseEntity<List<TargetStatistic>> getStaticInfo();
-
-    ResponseEntity<Void> trainModel();
 }

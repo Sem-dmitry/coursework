@@ -40,7 +40,7 @@ function predictDrawing() {
     const cells = document.querySelectorAll('.cell');
     const matrix = Array.from(cells).map(cell => cell.style.backgroundColor === 'black' ? 0 : 255);
 
-    fetch('/predict', {
+    fetch('/pictures/predict', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -70,7 +70,7 @@ function saveDrawing() {
     const cells = document.querySelectorAll('.cell');
     const matrix = Array.from(cells).map(cell => cell.style.backgroundColor === 'black' ? 0 : 255);
 
-    fetch('/save', {
+    fetch('/pictures/save', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

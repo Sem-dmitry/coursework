@@ -22,12 +22,18 @@ public class SpringSecurityConfiguration {
         http.authorizeHttpRequests(expressionInterceptUrlRegistry ->
                         expressionInterceptUrlRegistry
                                 .requestMatchers("/registration", "/login").permitAll()
-                                .requestMatchers(HttpMethod.POST, "/predict").hasAnyAuthority(
+                                .requestMatchers(HttpMethod.GET, "/pictures/**").hasAnyAuthority(
+                                        UserAuthority.VIEW_PICTURES.getAuthority(),
                                         UserAuthority.CREATE_PICTURES.getAuthority(),
                                         UserAuthority.SAVE_PICTURES.getAuthority(),
                                         UserAuthority.MANAGE_PICTURES.getAuthority()
                                 )
-                                .requestMatchers(HttpMethod.POST, "/save").hasAnyAuthority(
+                                .requestMatchers(HttpMethod.POST, "/pictures/predict").hasAnyAuthority(
+                                        UserAuthority.CREATE_PICTURES.getAuthority(),
+                                        UserAuthority.SAVE_PICTURES.getAuthority(),
+                                        UserAuthority.MANAGE_PICTURES.getAuthority()
+                                )
+                                .requestMatchers(HttpMethod.POST, "/pictures/save").hasAnyAuthority(
                                         UserAuthority.SAVE_PICTURES.getAuthority(),
                                         UserAuthority.MANAGE_PICTURES.getAuthority()
                                 )
